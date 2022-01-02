@@ -6,7 +6,7 @@ This repository contains a collection of shell scripts (sensitive scripts omitte
 
 ## Backup
  
-Scan recursively `TARGET_DIR` and all of its sub-directories except those specified in the `OMIT_DIRS` array. Any file with a .sh, .py, .slurm, or .R extension is copied and stored in a compressed tarball located in `DEPOSIT_DIR`.
+Scan recursively `TARGET_DIR` and all of its sub-directories except those specified in the `OMIT_DIRS` array. Any file with a .sh, .py, .slurm, or .R extension is copied and stored in a compressed tarball located in `BACKUP_DIR`.
 
 ---
 
