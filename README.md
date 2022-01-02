@@ -12,6 +12,10 @@ Scan recursively `TARGET_DIR` and all of its sub-directories except those specif
 
 ## Scan Permissions
 
+Scan recursively `TARGET_DIR` and all of its sub-directories except those specified in the `OMIT_DIRS` array up to a maximum depth of `MAX_DEPTH`. This script generates 3 deliverables, all of which are stored in `DEPOSIT_DIR`:
 
+1) One
+2) Two
+3) Three
 
 ---
