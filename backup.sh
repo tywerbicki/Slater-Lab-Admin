@@ -1,6 +1,6 @@
 #!/bin/bash
 
-##### Backup critical files to external drive. #####
+##### Backup compute scripts and source code to cloud. #####
 
 TARGET_DIR="/work/slater_lab"
 BACKUP_DIR="/home/ty.werbicki/Slater_Lab"
@@ -19,8 +19,8 @@ do
     # Log directory.
     echo "Searching ${TARGET_DIR}/${dir}"
 
-    # Search for and copy any .sh, .py, or .slurm files.
-    find $TARGET_DIR/$dir \( -name "*.sh" -o -name "*.py" -o -name "*.slurm" \) \
+    # Search for and copy any .sh, .py, .slurm, or .R files.
+    find $TARGET_DIR/$dir \( -name "*.sh" -o -name "*.py" -o -name "*.slurm" -o -name "*.R" \) \
         -exec cp "{}" . \;
 
 done
@@ -34,6 +34,6 @@ tar czf $BACKUP_DIR/slater_lab_backup.tar.gz *
 # Remove temporary dir.
 rm -rf $BACKUP_DIR/slater_lab_backup_tmp
 
-# How to extract the backup (slater_lab_backup.tar.gz).
+# How to extract the backup (slater_lab_backup.tar.gz):
 #mkdir -p <path/to/extract_dir> 
 #tar -xf slater_lab_backup.tar.gz -C <path/to/extract_dir>
