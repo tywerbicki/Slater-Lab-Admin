@@ -7,9 +7,9 @@ BACKUP_DIR="/home/ty.werbicki/Slater_Lab"
 OMIT_DIRS=("anaconda3" "software" "src")
 
 # Make temporary directory to store files.
-mkdir -pv $BACKUP_DIR/slater_lab_backup_tmp
+mkdir -pv "${BACKUP_DIR}/slater_lab_backup_tmp"
 
-cd $BACKUP_DIR/slater_lab_backup_tmp
+cd "${BACKUP_DIR}/slater_lab_backup_tmp"
 
 for dir in $(ls "$TARGET_DIR")
 do
@@ -20,7 +20,7 @@ do
     echo "Searching ${TARGET_DIR}/${dir}"
 
     # Search for and copy any .sh, .py, .slurm, or .R files.
-    find $TARGET_DIR/$dir \( -name "*.sh" -o -name "*.py" -o -name "*.slurm" -o -name "*.R" \) \
+    find "${TARGET_DIR}/${dir}" \( -name "*.sh" -o -name "*.py" -o -name "*.slurm" -o -name "*.R" \) \
         -exec cp "{}" . \;
 
 done
@@ -29,10 +29,10 @@ done
 # c = create new archive.
 # z = filter the archive through gzip.
 # f = use archive file.
-tar czf $BACKUP_DIR/slater_lab_backup.tar.gz *
+tar czf "${BACKUP_DIR}/slater_lab_backup.tar.gz" *
 
 # Remove temporary dir.
-rm -rf $BACKUP_DIR/slater_lab_backup_tmp
+rm -rf "${BACKUP_DIR}/slater_lab_backup_tmp"
 
 # How to extract the backup (slater_lab_backup.tar.gz):
 #mkdir -p <path/to/extract_dir> 
