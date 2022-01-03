@@ -27,3 +27,7 @@ Scan recursively `TARGET_DIR` and all of its sub-directories except those specif
     * A text file containing a miniature *report* for each user specified in the `USERS` array. Each report lists the number of files owned by that user that have an incorrectly specified group, as well as the number of files owned by that user that are accessible to 'other users'.
 
 ---
+
+## Query Jobs
+
+---
