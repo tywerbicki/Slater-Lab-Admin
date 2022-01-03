@@ -30,4 +30,6 @@ Scan recursively `TARGET_DIR` and all of its sub-directories except those specif
 
 ## Query Jobs
 
+Deposits *jobs_report.txt* in `DEPOSIT_DIR`, which lists the number of pending and running jobs for each user specified in the `USERS` array.
+
 ---
