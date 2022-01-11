@@ -1,6 +1,11 @@
 # Slater Lab Administration
 
-This repository contains a collection of shell scripts (sensitive scripts omitted) that I use to help monitor and manage the Slater Lab compute environment.
+This repository contains a collection of shell scripts (sensitive scripts omitted) that I use to help monitor and manage the Slater Lab compute environment:
+
+* [Backup](#backup)
+* [Scan Permissions](#scan-permissions)
+* [Query Jobs](#query-jobs)
+* [*Additional Useful Commands*](#additional-useful-commands)
 
 ---
 
@@ -31,5 +36,13 @@ Scan recursively `TARGET_DIR` and all of its sub-directories except those specif
 ## Query Jobs
 
 Deposits *jobs_report.txt* in `DEPOSIT_DIR`, which lists the number of pending and running jobs for each user specified in the `USERS` array.
+
+---
+
+## Additional Useful Commands
+
+* Retrieve a sorted list of the `N`-1 largest directories by disk usage in directory `FOLDER`:
+
+    > `du -h --max-depth=1 <FOLDER> | sort -hr | head -n <N>` 
 
 ---
