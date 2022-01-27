@@ -3,15 +3,14 @@
 ##### Backup compute scripts and source code to cloud. #####
 
 TARGET_DIR="/work/slater_lab"
-BACKUP_DIR="/home/ty.werbicki/Slater_Lab"
+BACKUP_DESTINATION="/home/ty.werbicki/Slater_Lab"
 OMIT_DIRS=("anaconda3" "software" "src")
 
 # Make temporary directory to store files.
-mkdir -pv "${BACKUP_DIR}/slater_lab_backup_tmp"
+mkdir -pv "${BACKUP_DESTINATION}/slater_lab_backup_tmp"
+cd "$TARGET_DIR"
 
-cd "${BACKUP_DIR}/slater_lab_backup_tmp"
-
-for dir in $(ls "$TARGET_DIR")
+for dir in $( ls )
 do
     # Don't scan a directory if it is to be omitted.
     [[ $( echo ${OMIT_DIRS[@]} | grep -Fw "$dir" | wc -l ) -eq 1 ]] && continue
@@ -19,20 +18,32 @@ do
     # Log directory.
     echo "Searching ${TARGET_DIR}/${dir}"
 
-    # Search for and copy any .sh, .py, .slurm, or .R files.
-    find "${TARGET_DIR}/${dir}" \( -name "*.sh" -o -name "*.py" -o -name "*.slurm" -o -name "*.R" \) \
-        -exec cp "{}" . \;
+    # Search for any of the following file extensions and store in text file.
+    find "$dir" \( -name "*.sh" -o -name "*.py" -o -name "*.slurm" -o -name "*.R" -o -name "*.c" -o -name "*.cpp" \) \
+        > file_names.txt
+
+    # Copy the files of interest into the temporary backup directory.
+    # This method will preserve the directory structure.
+    while read file_name; do
+        dir=$( dirname "$file_name" )
+        mkdir -p "${BACKUP_DESTINATION}/slater_lab_backup_tmp/${dir}"
+        cp "$file_name" "${BACKUP_DESTINATION}/slater_lab_backup_tmp/${file_name}" 
+    done < file_names.txt
 
 done
+
+rm file_names.txt
+cd "${BACKUP_DESTINATION}/slater_lab_backup_tmp"
 
 # Compress directory.
 # c = create new archive.
 # z = filter the archive through gzip.
 # f = use archive file.
-tar czf "${BACKUP_DIR}/slater_lab_backup.tar.gz" *
+tar czf "${BACKUP_DESTINATION}/slater_lab_backup.tar.gz" *
 
-# Remove temporary dir.
-rm -rf "${BACKUP_DIR}/slater_lab_backup_tmp"
+# Remove temporary directory.
+cd "$HOME"
+rm -rf "${BACKUP_DESTINATION}/slater_lab_backup_tmp"
 
 # How to extract the backup (slater_lab_backup.tar.gz):
 #mkdir -p <path/to/extract_dir> 
